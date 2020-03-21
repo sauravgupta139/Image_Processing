@@ -30,23 +30,30 @@ fy=[1 1 1; 0 0 0; -1 -1 -1;];
 Jx = filter2(fx,G);
 Jy = filter2(fy,G);
 
+%Mod of x and y
+Jx_square = Jx.^2;
+Jy_square = Jy.^2;
+Jmod = round(sqrt(Jx_square+Jy_square));
+
+%Thresholding - output to zero if less than threshold
+Jth = Jmod;
+Threshold=100;
+Jth(Jth<=Threshold)=0;
+
 %Plot R G B
 subplot(2,2,1);
-imshow(G);
-title('Grayscale Component');
+imshow(I);
+title('Original RGB Image');
 
 %Plot Grayscale
 subplot(2,2,2);
+imshow(G);
+title('Grayscale Component');
+
+subplot(2,2,3);
+imshow(Jth);
+title('Prewitt edge - DIY');
+
+subplot(2,2,4);
 imshow(J2);
 title('Prewitt edge - Builtin Function');
-
-%Plot edge x
-subplot(2,2,3);
-imshow(Jx);
-title('Prewitt edge - Edge at x direction - DIY');
-
-%Plot egde y
-subplot(2,2,4);
-imshow(Jy);
-title('Prewitt edge - Edge at y direction - DIY');
-

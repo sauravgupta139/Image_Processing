@@ -43,19 +43,17 @@ Jth(Jth<=Threshold)=0;
 %Plot R G B
 subplot(2,2,1);
 imshow(I);
-title('RGB Component');
+title('Original RGB Image');
 
 %Plot Grayscale
 subplot(2,2,2);
 imshow(G);
 title('Grayscale Component');
 
-%Plot edge x
 subplot(2,2,3);
 imshow(Jth);
 title('Sobel edge - DIY');
 
-%Plot egde y
 subplot(2,2,4);
 imshow(J2);
 title('Sobel edge -Builtin Function ');

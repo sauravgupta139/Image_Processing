@@ -26,7 +26,7 @@ J2 = filter2(fy,G);
 %Plot R G B
 subplot(2,2,1);
 imshow(I);
-title('RGB Component');
+title('Original RGB Image');
 
 %Plot Grayscale
 subplot(2,2,2);

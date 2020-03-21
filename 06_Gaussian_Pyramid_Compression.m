@@ -32,7 +32,7 @@ for i=1 : round(Col/2)
 	J(:,i) = A';
 end
 
-%convert double ti uint8
+%convert double to uint8
 J=uint8(J);
 
 %Print entropy
