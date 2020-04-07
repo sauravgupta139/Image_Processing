@@ -27,12 +27,15 @@ end
 
 %Step 3.
 I_equalized = zeros(Row,Col);
-no_of_bins = 64;
+no_of_bins = 255;
 for i=1 : Row
 	for j=1:Col
 		I_equalized(i,j) = uint8(CDF_before(G(i,j))*no_of_bins);
 	end
 end
+
+%convert matrxix to uint8 for display
+I_equal = uint8(I_equalized);
 
 hist_after = hist(reshape(I_equalized,[],1),256)';
 
@@ -69,11 +72,11 @@ plot(CDF_after);
 title('After Histogram Equalization - CDF');
 
 subplot(3,3,7);
-imshow(I_equalized);
+imshow(I_equal);
 title('After Histogram Equalization - Image (DIY)');
 
 subplot(3,3,8);
-imhist(I_equalized);
+imhist(I_equal);
 title('After Histogram Equalization - Histogram (DIY)');
 
 subplot(3,3,9);

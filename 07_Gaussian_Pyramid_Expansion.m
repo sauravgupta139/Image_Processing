@@ -9,7 +9,7 @@ I = imread("lena.png");
 %convert RGB to grayscale
 G = rgb2gray(I);
 
-%Use existing package. Ready made function - threshold 0.75 * Mean of absolute value of LoG filter response, sigma 2 
+%Built in function 
 J2 = impyramid(G,"expand");
 
 %DIY
