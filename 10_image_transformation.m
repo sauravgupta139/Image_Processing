@@ -1,71 +1,72 @@
 %Load image
 Im = imread('apple.jpg');
-
+%row*col = y*x = h*w
 %Translation, x' = [I t] x
 I = eye(2); %2x2 identity matrix
-t = [30; 40];
+t = [90; 100];
 [Row,Col,ch] = size(Im);
 Im_trans = zeros(Row+t(1),Col+t(2),3);
 for k=1:ch
 	for i=1:Row
-    for j=1:Col
-		  x = [i;j;1];
-		  x_prime = [I t] * x;
-		  row_prime = x_prime(1);
-	    col_prime = x_prime(2);	
-		  Im_trans(row_prime,col_prime,k) = Im(i,j,k);
-	  end
-  end
+		for j=1:Col
+			x = [i;j;1];
+			x_prime = [I t] * x;
+			row_prime = x_prime(1);
+			col_prime = x_prime(2);	
+			Im_trans(row_prime,col_prime,k) = Im(i,j,k);
+		end
+	end
 end
 
 %Rotation + Translation, x= Rx + t
-theta = 45 * pi/180;
+theta = 15 * pi/180;
 R = [cos(theta), -sin(theta); ...
       sin(theta), cos(theta)];
-Im_rot = zeros(Row+t(1),Col+t(2),3);
+Im_rot = zeros(ceil(Col*cos(theta)+Row*sin(theta)+t(1)),ceil(Row*cos(theta)+Col*sin(theta)+t(2)),3);
 for k=1:ch
 	for i=1:Row
-    for j=1:Col
-		  x = [i;j;1];
-		  x_prime = round([R t] * x);
-		  if (x_prime(1) <= 0)
-        row_prime = 1;
-      else
-        row_prime = x_prime(1);
-	    end
-      if (x_prime(2) <= 0)
-        col_prime = 1;	
-		  else
-        col_prime = x_prime(2);	
-      end
-      Im_rot(row_prime,col_prime,k) = Im(i,j,k);
-	  end
-  end
+		for j=1:Col
+			x = [i;j;1];
+			x_prime = round([R t] * x);
+			if (x_prime(1) <= 0)
+				row_prime = 1;
+			else
+				row_prime = x_prime(1);
+			end
+			if (x_prime(2) <= 0)
+				col_prime = 1;	
+			else
+				col_prime = x_prime(2);	
+			end
+			Im_rot(row_prime,col_prime,k) = Im(i,j,k);
+		end
+	end
 end
 
 %Scaled Rotation + Translation, x= sRx + t
-theta = 45 * pi/180;
-R = 2*[cos(theta), -sin(theta); ...
+theta = 15 * pi/180;
+s = 2;
+R = s*[cos(theta), -sin(theta); ...
       sin(theta), cos(theta)];
-Im_srot = zeros(Row+t(1),Col+t(2),3);
+Im_srot = zeros(ceil(s*(Col*cos(theta)+Row*sin(theta)))+t(1),ceil(s*(Row*cos(theta)+Col*sin(theta)))+t(2),3);
 for k=1:ch
 	for i=1:Row
-    for j=1:Col
-		  x = [i;j;1];
-		  x_prime = round([R t] * x);
-		  if (x_prime(1) <= 0)
-        row_prime = 1;
-      else
-        row_prime = x_prime(1);
-	    end
-      if (x_prime(2) <= 0)
-        col_prime = 1;	
-		  else
-        col_prime = x_prime(2);	
-      end
-		  Im_srot(row_prime,col_prime,k) = Im(i,j,k);
-	  end
-  end
+		for j=1:Col
+			x = [i;j;1];
+			x_prime = round([R t] * x);
+			if (x_prime(1) <= 0)
+				row_prime = 1;
+			else
+				row_prime = x_prime(1);
+			end
+			if (x_prime(2) <= 0)
+				col_prime = 1;	
+			else
+				col_prime = x_prime(2);	
+			end
+			Im_srot(row_prime,col_prime,k) = Im(i,j,k);
+		end
+	end
 end
 
 %Affine Transformation, x= Ax
@@ -81,22 +82,22 @@ A = [2, 0, 0; ...
 Im_affine = zeros(Row,Col,3);
 for k=1:ch
 	for i=1:Row
-    for j=1:Col
-		  x = [i;j;1];
-		  x_prime = A * x;
-		  if (x_prime(1) <= 0)
-        row_prime = 1;
-      else
-        row_prime = x_prime(1);
-	    end
-      if (x_prime(2) <= 0)
-        col_prime = 1;
-		  else
-        col_prime = x_prime(2);
-      end
-		  Im_affine(row_prime,col_prime,k) = Im(i,j,k);
-	  end
-  end
+		for j=1:Col
+			x = [i;j;1];
+			x_prime = A * x;
+			if (x_prime(1) <= 0)
+				row_prime = 1;
+			else
+				row_prime = x_prime(1);
+			end
+			if (x_prime(2) <= 0)
+				col_prime = 1;
+			else
+				col_prime = x_prime(2);
+			end
+			Im_affine(row_prime,col_prime,k) = Im(i,j,k);
+		end
+	end
 end
 
 %Projective Transformation, x= Hx
@@ -106,22 +107,22 @@ H = [2, 0, -3; ...
 Im_projective = zeros(Row,Col,3);
 for k=1:ch
 	for i=1:Row
-    for j=1:Col
-		  x = [i;j;1];
-		  x_prime = H * x;
-		  if (x_prime(1) <= 0)
-        row_prime = 1;
-      else
-        row_prime = round(x_prime(1)/x_prime(3));
-	    end
-      if (x_prime(2) <= 0)
-        col_prime = 1;
-		  else
-        col_prime = round(x_prime(2)/x_prime(3));
-      end
-		  Im_projective(row_prime,col_prime,k) = Im(i,j,k);
-	  end
-  end
+		for j=1:Col
+			x = [i;j;1];
+			x_prime = H * x;
+			if (x_prime(1) <= 0)
+				row_prime = 1;
+			else
+				row_prime = round(x_prime(1)/x_prime(3));
+			end
+			if (x_prime(2) <= 0)
+				col_prime = 1;
+			else
+				col_prime = round(x_prime(2)/x_prime(3));
+			end
+			Im_projective(row_prime,col_prime,k) = Im(i,j,k);
+		end
+	end
 end
 
 %Show image
