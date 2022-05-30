@@ -83,3 +83,5 @@ subplot(3,3,9);
 plot(CDF_after);
 title('After Histogram Equalization - CDF');
 
+pause;
+

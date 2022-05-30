@@ -118,3 +118,5 @@ subplot(3,2,6);
 imshow(g1);
 title('Laplacian Pyramid Blending Image 1 and 2');
 
+
+pause;

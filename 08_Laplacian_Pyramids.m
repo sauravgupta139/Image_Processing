@@ -56,3 +56,5 @@ subplot(2,2,4);
 imshow(L1);
 title('Laplacian Pyramid Difference between original and Reduced-Expanded Image');
 
+
+pause;

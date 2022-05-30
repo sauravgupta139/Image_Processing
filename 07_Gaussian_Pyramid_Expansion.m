@@ -55,3 +55,5 @@ subplot(2,2,4);
 imshow(J2);
 title('Gaussian Pyramid Expansion -Builtin Function');
 
+
+pause;

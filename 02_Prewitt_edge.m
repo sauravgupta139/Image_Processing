@@ -57,3 +57,5 @@ title('Prewitt edge - DIY');
 subplot(2,2,4);
 imshow(J2);
 title('Prewitt edge - Builtin Function');
+
+pause;

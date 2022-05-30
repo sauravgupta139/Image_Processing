@@ -41,20 +41,29 @@ Threshold=200;
 Jth(Jth<=Threshold)=0;
 
 %Plot R G B
-subplot(2,2,1);
+subplot(3,2,1);
 imshow(I);
 title('Original RGB Image');
 
 %Plot Grayscale
-subplot(2,2,2);
+subplot(3,2,2);
 imshow(G);
 title('Grayscale Component');
 
-subplot(2,2,3);
+subplot(3,2,3);
 imshow(Jth);
 title('Sobel edge - DIY');
 
-subplot(2,2,4);
+subplot(3,2,4);
 imshow(J2);
 title('Sobel edge -Builtin Function ');
 
+subplot(3,2,5);
+imshow(Jx);
+title('Sobel edge -x -direction ');
+
+subplot(3,2,6);
+imshow(Jy);
+title('Sobel edge -y -direction ');
+
+pause;

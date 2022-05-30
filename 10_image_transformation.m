@@ -71,38 +71,33 @@ end
 
 %Affine Transformation, x= Ax
 %shear
-%A = [1, 0.5, 0; ...
-%     0, 1, 0];
+A = [1, 0.5, 0; ...
+     0, 1, 0];
 %stretch horizontally
 %A = [1, 0, 0; ...
 %     0, 2, 0];  
 %stretch vertically
-A = [2, 0, 0; ...
-     0, 1, 0];
+%A = [2, 0, 0; ...
+%     0, 1, 0];
+%Double
+%A = [2, 0, 0; ...
+%     0, 2, 0];	 
 Im_affine = zeros(Row,Col,3);
 for k=1:ch
 	for i=1:Row
 		for j=1:Col
 			x = [i;j;1];
 			x_prime = A * x;
-			if (x_prime(1) <= 0)
-				row_prime = 1;
-			else
-				row_prime = x_prime(1);
-			end
-			if (x_prime(2) <= 0)
-				col_prime = 1;
-			else
-				col_prime = x_prime(2);
-			end
+			row_prime = round(x_prime(1));
+			col_prime = round(x_prime(2));
 			Im_affine(row_prime,col_prime,k) = Im(i,j,k);
 		end
 	end
 end
 
-%Projective Transformation, x= Hx
-H = [2, 0, -3; ...
-     0, 2, -3; ...
+%Projective Transformation, x= Hx (need to understand this)
+H = [2, 0, -1; ...
+     0, 2, -1; ...
      0, 0,  1];
 Im_projective = zeros(Row,Col,3);
 for k=1:ch
@@ -110,16 +105,8 @@ for k=1:ch
 		for j=1:Col
 			x = [i;j;1];
 			x_prime = H * x;
-			if (x_prime(1) <= 0)
-				row_prime = 1;
-			else
-				row_prime = round(x_prime(1)/x_prime(3));
-			end
-			if (x_prime(2) <= 0)
-				col_prime = 1;
-			else
-				col_prime = round(x_prime(2)/x_prime(3));
-			end
+			row_prime = round(x_prime(1)/x_prime(3));
+			col_prime = round(x_prime(2)/x_prime(3));
 			Im_projective(row_prime,col_prime,k) = Im(i,j,k);
 		end
 	end
@@ -144,3 +131,5 @@ subplot(2,3,5);
 imshow(Im_affine);
 subplot(2,3,6);
 imshow(Im_projective);
+
+pause;
