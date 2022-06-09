@@ -14,7 +14,8 @@ J2 = edge(G,"LoG");
 
 %DIY
 %Step 1. Create laplacian of gaussian filter with sigma =2, Matrix Size = 6*sigma+1 to cover 99.7%
-g = fspecial('log',13,2);
+sigma=2;
+g = fspecial('log',6*sigma+1,sigma);
 
 %Step 2. Apply the filter
 J = conv2(G,g,"same");
