@@ -4,7 +4,7 @@ clear
 pkg load image;
 
 %Read Image
-I = imread("lena.png");
+I = imread("images/lena.png");
 
 %convert RGB to grayscale
 G = rgb2gray(I);

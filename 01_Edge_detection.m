@@ -1,7 +1,7 @@
 clear
 
 %Read Image
-I = imread("lena.png");
+I = imread("images/lena.png");
 
 %Package 
 pkg load image;

@@ -1,5 +1,5 @@
 %Load image
-Im = imread('apple.jpg');
+Im = imread('images/apple.jpg');
 %row*col = y*x = h*w
 %Translation, x' = [I t] x
 I = eye(2); %2x2 identity matrix

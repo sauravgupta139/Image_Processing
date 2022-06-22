@@ -4,7 +4,7 @@ clear
 pkg load image;
 
 %Read Image
-I = imread("chess.jpg");
+I = imread("images/chess.jpg");
 
 %convert RGB to grayscale
 G = rgb2gray(I);

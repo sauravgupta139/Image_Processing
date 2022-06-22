@@ -4,7 +4,7 @@ clear
 pkg load image;
 
 %Read Image
-I = imread("lena.png");
+I = imread("images/zebra.jpg");
 
 %convert RGB to grayscale
 G = rgb2gray(I);
@@ -16,6 +16,7 @@ J2 = edge(G,"LoG");
 %Step 1. Create laplacian of gaussian filter with sigma =2, Matrix Size = 6*sigma+1 to cover 99.7%
 sigma=2;
 g = fspecial('log',6*sigma+1,sigma);
+%surf(g) %Mexican Hat
 
 %Step 2. Apply the filter
 J = conv2(G,g,"same");
@@ -35,8 +36,8 @@ title('Original RGB Image');
 
 %Plot Grayscale
 subplot(2,2,2);
-imshow(G);
-title('Grayscale Component');
+imshow(z);
+title('Edges using LoG - w/o Threshold');
 
 subplot(2,2,3);
 imshow(J1);

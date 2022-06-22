@@ -4,8 +4,8 @@ clear
 pkg load image;
 
 %Read Image
-Ia = imread("apple.jpg");
-Ib = imread("orange.jpg");
+Ia = imread("images/apple.jpg");
+Ib = imread("images/orange.jpg");
 
 %convert RGB to grayscale
 IGa = rgb2gray(Ia);
